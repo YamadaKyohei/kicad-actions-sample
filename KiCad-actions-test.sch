@@ -1,0 +1,84 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Device:Battery BT1
+U 1 1 5F9E9EB5
+P 3400 3700
+F 0 "BT1" H 3508 3746 50  0000 L CNN
+F 1 "AAA Battery x 2" H 3508 3655 50  0000 L CNN
+F 2 "Battery:BatteryHolder_Keystone_2468_2xAAA" V 3400 3760 50  0001 C CNN
+F 3 "~" V 3400 3760 50  0001 C CNN
+	1    3400 3700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:LED D1
+U 1 1 5F9EA75D
+P 4350 3650
+F 0 "D1" V 4389 3532 50  0000 R CNN
+F 1 "red LED" V 4298 3532 50  0000 R CNN
+F 2 "LED_THT:LED_D5.0mm" H 4350 3650 50  0001 C CNN
+F 3 "~" H 4350 3650 50  0001 C CNN
+	1    4350 3650
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 5F9EB705
+P 3900 3350
+F 0 "R1" V 3693 3350 50  0000 C CNN
+F 1 "330" V 3784 3350 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0614_L14.3mm_D5.7mm_P25.40mm_Horizontal" V 3830 3350 50  0001 C CNN
+F 3 "~" H 3900 3350 50  0001 C CNN
+	1    3900 3350
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR01
+U 1 1 5F9EBF27
+P 3400 4050
+F 0 "#PWR01" H 3400 3800 50  0001 C CNN
+F 1 "GND" H 3405 3877 50  0000 C CNN
+F 2 "" H 3400 4050 50  0001 C CNN
+F 3 "" H 3400 4050 50  0001 C CNN
+	1    3400 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR02
+U 1 1 5F9EC47F
+P 4350 4050
+F 0 "#PWR02" H 4350 3800 50  0001 C CNN
+F 1 "GND" H 4355 3877 50  0000 C CNN
+F 2 "" H 4350 4050 50  0001 C CNN
+F 3 "" H 4350 4050 50  0001 C CNN
+	1    4350 4050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3400 3900 3400 4050
+Wire Wire Line
+	4350 3800 4350 4050
+Wire Wire Line
+	3400 3500 3400 3350
+Wire Wire Line
+	3400 3350 3750 3350
+Wire Wire Line
+	4050 3350 4350 3350
+Wire Wire Line
+	4350 3350 4350 3500
+$EndSCHEMATC
+
