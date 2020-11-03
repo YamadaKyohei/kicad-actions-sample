@@ -1,0 +1,71 @@
+name: KiCad-exports-release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: nerdyscout/kicad-exports@v2.1
+      with:
+      # Required - kibot config file
+        config: ./config/docs.kibot.yaml
+      # optional - prefix to output defined in config
+        dir: docs
+      # optional - schematic file
+        schema: '*.sch'
+      # optional - PCB design file
+        board: '*.kicad_pcb'
+    - uses: nerdyscout/kicad-exports@v2.1
+      with:
+      # Required - kibot config file
+        config: ./config/fabrications.kibot.yaml
+      # optional - prefix to output defined in config
+        dir: gerber
+      # optional - schematic file
+        schema: '*.sch'
+      # optional - PCB design file
+        board: '*.kicad_pcb'
+       
+    - name: Create release
+      id: create_release
+      uses: actions/create-release@v1.0.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+    - name: docs zip output
+      run: |
+        cd ./docs/docs
+        zip ../../docs * -x *.ogv
+    - name: Upload Release Docs
+      id: upload-release-docs
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: docs.zip
+        asset_name: docs.zip
+        asset_content_type: application/zip
+    - name: docs zip output
+      run: |
+        cd ./gerber/gerber
+        zip ../../gerber *.*
+    - name: Upload Release Gerbers
+      id: upload-release-gerber
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: gerber.zip
+        asset_name: gerber.zip
+        asset_content_type: application/zip
